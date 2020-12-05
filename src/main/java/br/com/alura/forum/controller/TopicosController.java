@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.forum.TopicoRepository;
 import br.com.alura.forum.controller.dto.TopicoDto;
-import br.com.alura.forum.modelo.Topico;
 
 @RestController
 public class TopicosController {
@@ -17,8 +16,10 @@ public class TopicosController {
 	private TopicoRepository topicoRepository;
 
 	@GetMapping("/topicos")
-	public List<TopicoDto> lista() {
-		List<Topico> topicos = this.topicoRepository.findAll() ;
-		return TopicoDto.converter(topicos);
+	public List<TopicoDto> lista(String nomeCurso) {
+		if (nomeCurso == null) {
+			return TopicoDto.converter(this.topicoRepository.findAll());
+		}
+		return TopicoDto.converter(this.topicoRepository.findByCursoNome(nomeCurso));
 	}
 }
