@@ -1,4 +1,4 @@
-package br.com.alura.forum;
+package br.com.alura.forum.repository;
 
 import java.util.List;
 
